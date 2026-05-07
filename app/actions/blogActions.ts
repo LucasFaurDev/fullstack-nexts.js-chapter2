@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import { createBlog } from "../services/blogService";
+import { createBlog, likeBlog } from "../services/blogService";
 import { BlogDto } from "../interfaces/blogDto";
 
 export const createBlogAction = async (fromData: FormData) => {
@@ -15,4 +15,11 @@ export const createBlogAction = async (fromData: FormData) => {
 
   revalidatePath("/blogs");
   redirect("/blogs");
+};
+
+export const likeBlogAction = async (formData: FormData) => {
+  const id = Number(formData.get("id"));
+  likeBlog(id);
+
+  revalidatePath(`/blogs/${id}`);
 };

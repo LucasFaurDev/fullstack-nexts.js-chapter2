@@ -1,4 +1,5 @@
 import { getBlogById } from "@/app/services/blogService";
+import { likeBlogAction } from "@/app/actions/blogActions";
 
 const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
@@ -16,7 +17,11 @@ const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
           {blog.url}
         </a>
       </p>
-      <p>Likes: {blog.likes}</p>
+      <span>Likes: {blog.likes}</span>
+      <form action={likeBlogAction}>
+        <input type="hidden" name="id" value={blog.id} />
+        <button type="submit">Like</button>
+      </form>
     </section>
   );
 };

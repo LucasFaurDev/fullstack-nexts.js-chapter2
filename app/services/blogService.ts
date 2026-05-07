@@ -38,4 +38,13 @@ export const createBlog = (blogDto: BlogDto): Blog => {
 
 export const getBlogById = (id: number): Blog | undefined => {
   return blogs.find((blog) => blog.id === id);
-}
+};
+
+export const likeBlog = (id: number): Blog | undefined => {
+  const blog = getBlogById(id);
+
+  if (!blog) return undefined;
+
+  blog.likes += 1;
+  return blog;
+};
