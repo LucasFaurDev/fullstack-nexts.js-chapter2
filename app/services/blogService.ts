@@ -35,3 +35,7 @@ export const createBlog = (blogDto: BlogDto): Blog => {
 
   return newBlog;
 };
+
+export const getBlogById = (id: number): Blog | undefined => {
+  return blogs.find((blog) => blog.id === id);
+}
