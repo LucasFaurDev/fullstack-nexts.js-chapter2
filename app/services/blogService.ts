@@ -11,7 +11,7 @@ const blogs: Blog[] = [
   },
   {
     id: 2,
-    title: "Micriservices and the First Law of Distributed Objects",
+    title: "Microservices and the First Law of Distributed Objects",
     author: "Martin Fowler",
     url: "http://martinfowler.com/articles/distributed-objects-microservices.html",
     likes: 0,
