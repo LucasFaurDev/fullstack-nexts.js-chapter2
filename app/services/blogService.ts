@@ -1,4 +1,5 @@
 import { Blog } from "../interfaces/blog";
+import { BlogDto } from "../interfaces/blogDto";
 
 const blogs: Blog[] = [
   {
@@ -18,5 +19,19 @@ const blogs: Blog[] = [
 ];
 
 export const getAllBlogs = (): Blog[] => {
-    return blogs;
-}
+  return blogs;
+};
+
+export const createBlog = (blogDto: BlogDto): Blog => {
+  const newBlog: Blog = {
+    id: blogs.length + 1,
+    title: blogDto.title,
+    author: blogDto.author,
+    url: blogDto.url,
+    likes: 0,
+  };
+
+  blogs.push(newBlog);
+
+  return newBlog;
+};

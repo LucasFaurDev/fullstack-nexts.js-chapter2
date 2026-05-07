@@ -8,13 +8,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <div>
-          <nav>
-            <Link href="/">Home</Link>
-            {" | "}
-            <Link href="/blogs">Blogs</Link>
-          </nav>
-        </div>
+        <nav>
+          <Link href="/">Home</Link>
+          {" | "}
+          <Link href="/blogs">Blogs</Link>
+          {" | "}
+          <Link href="/blogs/new">New Blog</Link>
+        </nav>
         {children}
       </body>
     </html>
