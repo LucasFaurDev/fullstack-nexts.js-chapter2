@@ -3,12 +3,13 @@ import { getAllBlogs } from "../services/blogService";
 
 const Blogs = () => {
   const blogs = getAllBlogs();
+  const sortedBlogs = [...blogs].sort((a, b) => b.likes - a.likes)
 
   return (
     <div>
       <h1>Bloglist</h1>
       <ul>
-        {blogs.map((blog) => (
+        {sortedBlogs.map((blog) => (
           <li key={blog.id}>
             <Link href={`/blogs/${blog.id}`}>
               <p>
