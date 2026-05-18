@@ -3,7 +3,7 @@ import { likeBlogAction } from "@/app/actions/blogActions";
 
 const Blog = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params;
-  const blog = getBlogById(Number(id));
+  const blog = await getBlogById(Number(id));
 
   if (!blog) return <p>Blog not found</p>;
 

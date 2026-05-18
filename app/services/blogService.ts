@@ -1,50 +1,30 @@
-import { Blog } from "../interfaces/blog";
-import { BlogDto } from "../interfaces/blogDto";
+import { db } from "../../db";
+import { blogs } from "../../db/schema";
+import { eq } from "drizzle-orm";
 
-const blogs: Blog[] = [
-  {
-    id: 1,
-    title: "Things I Don't Know as of 2018",
-    author: "Dan Abramov",
-    url: "http://overreacted.io/things-i-dont-know-as-of-2018",
-    likes: 0,
-  },
-  {
-    id: 2,
-    title: "Microservices and the First Law of Distributed Objects",
-    author: "Martin Fowler",
-    url: "http://martinfowler.com/articles/distributed-objects-microservices.html",
-    likes: 0,
-  },
-];
-
-export const getAllBlogs = (): Blog[] => {
-  return blogs;
+export const getAllBlogs = async () => {
+  return db.query.blogs.findMany();
 };
 
-export const createBlog = (blogDto: BlogDto): Blog => {
-  const newBlog: Blog = {
-    id: blogs.length + 1,
-    title: blogDto.title,
-    author: blogDto.author,
-    url: blogDto.url,
-    likes: 0,
-  };
-
-  blogs.push(newBlog);
-
-  return newBlog;
+export const createBlog = async (
+  title: string,
+  author: string,
+  url: string,
+) => {
+  await db.insert(blogs).values({ title, author, url });
 };
 
-export const getBlogById = (id: number): Blog | undefined => {
-  return blogs.find((blog) => blog.id === id);
+export const getBlogById = async (id: number) => {
+  return db.query.blogs.findFirst({ where: eq(blogs.id, id) });
 };
 
-export const likeBlog = (id: number): Blog | undefined => {
-  const blog = getBlogById(id);
+export const likeBlog = async (id: number) => {
+  const blog = await getBlogById(id);
 
-  if (!blog) return undefined;
-
-  blog.likes += 1;
-  return blog;
+  if (blog) {
+    await db
+      .update(blogs)
+      .set({ likes: blog.likes + 1 })
+      .where(eq(blogs.id, id));
+  }
 };
