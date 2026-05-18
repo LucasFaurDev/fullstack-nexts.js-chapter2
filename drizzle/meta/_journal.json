@@ -8,6 +8,13 @@
       "when": 1778942032558,
       "tag": "0000_tan_deadpool",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1779106683211,
+      "tag": "0001_wandering_susan_delgado",
+      "breakpoints": true
     }
   ]
 }
